@@ -1,49 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/assets/style.css}">
-        <title>Mes recettes</title>
-        <script th:src="@{/script/xhr.script.js}"></script>
-    </head>
-    <body>
-        <header>
-            <a href="/">
-                <img th:src="@{/assets/img/logo.png}" class="logo">
-            </a>        
-            <nav>
-                <a href="/">Home</a>
-                <a href="#" class="active">Mes recettes</a>
-                <a href="/user/login/form" >Se connecter</a>
-                <a href="/user/inscription/form">S'inscrire</a>
-                <a href="/user/recette/enregistrement">
-                    <img th:src="@{/assets/img/saved.png}" class="header-save">
-                </a>
-            </nav>
-        </header>
-        <main>
-            <h1 style="display: flex;width:100%;justify-content: space-between; align-items: center;">
-                Mes recettes
-                <a href="">
-                    <button class="btn-recette">Ajouer un recette</button>
-                </a>
-            </h1>
-            <section id="recette-list">
-                <div class="recette-card"
-                    th:each="recette : ${listRecette}">
-                    <img th:src="@{/images/Surf_Board_MockupForFree.jpg}">
-                    <div style="margin-top: 15px;">
-                        <h3 th:text="${recette.getNomRecette()}"></h3>
-                        <h5 th:text="${recette.getDescriptions()}"></h5>
-                        <a th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/commentaires'}">Voir commentaire</a>
-                        <a th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/details'}">
-                            <button>Voir recette</button>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/assets/style.css}" />
+    <title>Mes recettes</title>
+    <script th:src="@{/script/xhr.script.js}"></script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-M5HL5D2G");
+    </script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-M5HL5D2G"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header>
+      <a href="/">
+        <img th:src="@{/assets/img/logo.png}" class="logo" />
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="#" class="active">Mes recettes</a>
+        <a href="/user/login/form">Se connecter</a>
+        <a href="/user/inscription/form">S'inscrire</a>
+        <a href="/user/recette/enregistrement">
+          <img th:src="@{/assets/img/saved.png}" class="header-save" />
+        </a>
+      </nav>
+    </header>
+    <main>
+      <h1
+        style="
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        Mes recettes
+        <a href="/user/recette/form">
+          <button class="btn-recette">Ajouer un recette</button>
+        </a>
+      </h1>
+      <section id="recette-list">
+        <div class="recette-card" th:each="recette : ${listRecette}">
+          <img th:src="@{/images/Surf_Board_MockupForFree.jpg}" />
+          <div style="margin-top: 15px">
+            <h3 th:text="${recette.getNomRecette()}"></h3>
+            <h5 th:text="${recette.getDescriptions()}"></h5>
+            <a
+              th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/commentaires'}"
+              >Voir commentaire</a
+            >
+            <a
+              th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/details'}"
+            >
+              <button>Voir recette</button>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
