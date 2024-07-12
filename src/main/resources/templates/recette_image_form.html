@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/assets/recette-form.css}">
+        <title>Recette formulaire - image</title>
+    </head>
+
+    <body>
+        <header>
+            <a href="#">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Recettes</a>
+                <a href="#">Mes recettes</a>
+                <a href="#">Se connecter</a>
+                <a href="#">S'inscrire</a>
+                <a href="#">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+        <main>
+            <div id="slogan">
+                <h1>PARTAGEZ VOS EXPERIENCES CULINAIRES !</h1>
+                <p>Racontez-nous vos aventures en cuisine et inspirez notre communauté 
+                    avec vos créations savoureuses. Partagez vos secrets, astuces 
+                    et recettes préférées pour que chacun puisse goûter à votre passion
+                    et à votre créativité.</p>
+            </div>
+            <form action="/user/recette/form/insert" method="POST" id="recette-form" enctype="multipart/form-data">
+                <center><h1>Ajouter une image </h1></center>
+                    <div th:if="${error} != null" th:text="${error}" style="color: red;"></div>
+                    <input type="file" name="image">
+                    <button class="suivant">Ajouter la recette</button>
+            </form>
+        </main>
+</html>

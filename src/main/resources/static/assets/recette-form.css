@@ -1,0 +1,145 @@
+html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000c7;
+}
+header{
+    /* background-color: blue; */
+    width: 86vw;
+    padding: 0vh 7vw 0vh 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo{
+    width: 50px;
+    height: 50px;
+}
+a{
+    text-decoration: none;
+    color: #000000c7;
+}
+header nav{
+    width: 50%;
+    /* background-color: blue; */
+    display: inherit;
+    justify-content: space-evenly;
+    align-items: center;
+}
+header .header-save{
+    width: 25px;
+    height: 25px;
+}
+main{
+    /* background-color: red; */
+    display: flex;
+    /* height: 85vh; */
+    width: 86vw;
+    padding: 0vh 7vw 0vh 7vw;
+    margin: 25px 0px 0px 0px;
+    justify-content: space-between;
+}
+#slogan{
+    width: 45%;
+    /* background-color: blue; */
+    margin: 0px 0px 0px 0px;
+}
+#slogan h1 {
+    font-size: 65px;
+    line-height: 1.1;
+    font-weight: 900;
+    /* color: #f5c900d9; */
+}
+#recette-form{
+    /* background-color: green; */
+    width: 40%;
+    margin: 30px 45px 0px 0px;
+    padding: 20px 20px 20px 20px;
+    border: 1pX solid #dbdbdb52;
+    box-shadow: 0px 0px 15px #c1c0c04a;
+    /* height: 90%; */
+}
+#recette-form input,
+#recette-form textarea,
+#recette-form .suivant,
+select,button{
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#recette-form input, 
+#recette-form textarea 
+.suivant,select,button{
+    padding: 15px 7px 15px 16px;
+    border-radius: 3px;
+    border: 1px solid #d9d9d9;
+    margin: 7px 0px 0px 0px;
+}
+#recette-form .suivant{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0px 10px 0px;
+    margin: 5px 0px 0px 0px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f5c900d9;
+}
+#recette-form .option{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.option select{
+    width: 60%;
+}
+.option button{
+    width: 30%;
+    background-color: #f5c900d9;
+}
+.form-list{
+    width: 100%;
+    height: 200px;
+    /* background-color: #fcf5d4ae; */
+    border-radius: 5px;
+    margin: 15px 0px 5px 0px;
+    padding: 10px 0px 0px 0px;
+    overflow-y: scroll;
+}
+.selected-option{
+    width: 96%;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    margin: 1px 0px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5px 0px 10px;
+}
+.selected-option button{
+    width: 20%;
+    margin: 0px;
+}
+.selected-option p{
+    width: 15%;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    /* background-color: aqua; */
+}
+input[type=file]{
+    /* height: 15%; */
+    /* padding: 0%; */
+}
+input[type=file]::file-selector-button{
+   background-color: rgb(218, 218, 218);
+   border: none;
+   /* height: 100%; */
+   padding: 5px 5px 5px 5px;
+}
+
+.active{
+    color: #41a339a8;
+}

@@ -1,0 +1,111 @@
+html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000c7;
+}
+header{
+    /* background-color: blue; */
+    width: 86vw;
+    padding: 0vh 7vw 0vh 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo{
+    width: 50px;
+    height: 50px;
+}
+a{
+    text-decoration: none;
+    color: #000000c7;
+}
+header nav{
+    width: 50%;
+    /* background-color: blue; */
+    display: inherit;
+    justify-content: space-evenly;
+    align-items: center;
+}
+header .header-save{
+    width: 25px;
+    height: 25px;
+}
+main{
+    /* background-color: red; */
+    display: flex;
+    height: 85vh;
+    width: 86vw;
+    padding: 0vh 7vw 0vh 7vw;
+    margin: 25px 0px 0px 0px;
+    justify-content: space-between;
+}
+#recette-info{
+    /* background-color: #fee98bd9; */
+    width: 35%;
+    margin: 0px 25px 0px 0px;
+    padding: 20px 20px 20px 25px;
+    border-radius: 10px;
+    border: 1pX solid #b3b0b052;
+    box-shadow: 0px 0px 15px #c1c0c04a;
+    overflow: hidden;
+}
+#recette-info img{
+    object-fit: contain;
+    width: 115%;
+    border-radius: 5px;
+    margin: -24px 0px 0px -32px;
+}
+#recette-info P{
+    width: 98%;
+}
+#recette-info span{
+    /* background-color: aqua; */
+    width: 50%;
+    /* display: flex; */
+    align-items: center;
+    /* justify-content: space-around; */
+}
+#recette-detail{
+    /* background-color: green; */
+    width: 45%;
+    overflow-y: scroll;
+    padding: 0px 100px 0px 10px;
+}
+
+.commentaire{
+    width: 95%;
+    background-color: #fff2b9d9;
+    padding: 1px 0px 5px 25px;
+    margin: 0px 0px 10px 0px;
+    border-radius: 9px;
+}
+.commentaire h4{
+    margin-bottom: -10px;
+}
+#commentaire-form{
+    width: 37%;
+    height: 50vh;
+    border: 1pX solid #dbdbdb52;
+    box-shadow: 0px 0px 15px #c1c0c04a;
+    padding: 20px 30px 0px 30px;
+    border-radius: 9px;
+}
+#commentaire-form button{
+    width: 100%;
+    background-color: #f5c900d9;
+    padding: 10px 7px 10px 16px;
+    border-radius: 3px;
+    border: none;
+}
+#commentaire-form textarea{
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0px 0px 20px 0px;
+}
+
+.active{
+    color: #41a339a8;
+}

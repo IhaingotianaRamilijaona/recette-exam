@@ -1,0 +1,153 @@
+html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000c7;
+}
+header{
+    /* background-color: blue; */
+    width: 86vw;
+    padding: 0vh 7vw 0vh 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo{
+    width: 50px;
+    height: 50px;
+}
+a{
+    text-decoration: none;
+    color: #000000c7;
+}
+header nav{
+    width: 50%;
+    /* background-color: blue; */
+    display: inherit;
+    justify-content: space-evenly;
+    align-items: center;
+}
+header .header-save{
+    width: 25px;
+    height: 25px;
+}
+main{
+    /* background-color: red; */
+    width: 86vw;
+    padding: 5vh 7vw 5vh 7vw;
+}
+#recette-list{
+    background-color: aquamarine;
+    width:100%;
+}
+.recette-card{
+    /* background-color: brown; */
+    width: 25%;
+    padding: 2% 2% 2% 2%;
+    display: grid;
+    margin: 5px 25px 10px 0px;
+    overflow: hidden;
+    float: left;
+    border-radius: 10px;
+    border: 1pX solid #dbdbdb52;
+    box-shadow: 0px 0px 15px #c1c0c04a;
+}
+.recette-card img{
+    /* object-fit: contain; */
+    width: 120%;
+    height: 195px;
+    margin: -23px 0px -18px -24px;
+}
+.saved, .unsaved{
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.saved {
+    background-image: url(img/saved.png);
+}
+.unsaved {
+    background-image: url(img/unsaved.png);
+}
+.recette-card .saved,
+.recette-card .unsaved{
+    position: relative;
+    left: 93%;
+    top: 200%;
+}
+
+.recette-card .saved:hover,
+.recette-card .unsaved:hover{
+    cursor: pointer;
+}
+.recette-card button{
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    border-radius: 10px;
+    border: none;
+    margin: 28px 0px 0px 0px;
+    background-color: #f5c900d9;
+    color: #000000;
+}
+
+#search-bar{
+    width: 21%;
+    padding: 10px 8px 10px 8px;
+    color: black;
+}
+
+form button {
+    background: black;
+    color: white;
+    padding: 11px 8px 11px 8px;
+    border-radius: 0px 3px 3px 0px;
+    margin: 0px 0px 0px -7px;
+    border: 1px solid black;
+}
+
+#categorie-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; 
+    /* background-color: aqua; */
+    padding: 10px 10px 10px 0px;
+}
+
+.radio-button {
+    display: none;
+}
+
+.radio-button + label {
+    float: left;
+    display: inline-block;
+    padding: 7px 30px;
+    border-radius: 5px;
+    background-color: #41a339a8;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    margin: 10px 10px 0px 0px;
+}
+
+.radio-button:checked + label {
+    background-color: white;
+    color: #41a339a8;
+    border: 1px solid #41a339a8;
+}
+
+.btn-recette{
+    width: 110%;
+    background-color: #41a339a8;
+    padding: 10px 7px 10px 16px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+}
+
+.active{
+    color: #41a339a8;
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>home</title>
+        <link rel="stylesheet" th:href="@{/assets/style.css}">
+        <script th:src="@{/script/xhr.script.js}"></script>
+        <script th:src="@{/script/enregistrer.script.js}"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="/" class="active">Home</a>
+                <a href="/user/recette/mesrecette">Mes recettes</a>                
+                <a href="/user/login/form"  th:if="${user}== null">Se connecter</a>
+                <a href="/user/inscription/form" th:if="${user}== null">S'inscrire</a> 
+                <a href="/user/deconnect" style="color: red;" th:unless="${user}== null">Se déconnecter</a>
+                <a href="/user/recette/enregistrement">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+        <main>
+            <form action="">
+                <input type="text" name="search" id="search-bar" placeholder="Tapez une recette,un ingrédient ...">
+                <button type="button" onclick="searchRecette()">Search</button>
+            </form>
+
+            <div id="categorie-list">
+                <input type="radio" name="idCategorie" 
+                        value="" class="radio-button" 
+                        id="tout"
+                        onclick="searchRecette()" checked>  
+                <label for="tout">Tout</label>
+                
+                <th:block th:each="categorie : ${listCategorie}" >
+                    <input type="radio" name="idCategorie" 
+                            th:value="${categorie.getIdCategorie()}"
+                            th:attr="id='categorie-'+${categorie.getIdCategorie()}" 
+                            class="radio-button"
+                            onclick="searchRecette()">  
+                    <label th:attr="for='categorie-'+${categorie.getIdCategorie()}"
+                        th:text="${categorie.getNomCategorie()}">
+                    </label>
+                </th:block>
+            </div>
+
+            <section id="recette-list">
+                <div class="recette-card"
+                    th:each="recette : ${listRecette}">
+                    <img th:src="@{/images/default.jpg}">
+                    <th:block th:if="${listEnregistrement.size()!=0}">
+                        <div alter="button"
+                            th:class="${listEnregistrement.contains(recette) ? 'saved' : 'unsaved' }"
+                            th:attr="id='recette-' + ${recette.getIdRecette()}"
+                            th:onclick="'enregistrer('+${recette.getIdRecette()}+')'">
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${listEnregistrement.size()!=0}">
+                        <div alter="button"
+                            class="unsaved"
+                            th:attr="id='recette-' + ${recette.getIdRecette()}"
+                            th:onclick="'enregistrer('+${recette.getIdRecette()}+')'">
+                        </div>
+                    </th:block>
+                    <div>
+                        <h3 th:text="${recette.getNomRecette()}"></h3>
+                        <h5 th:text="${recette.getDescriptions()}"></h5>
+                        <a th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/commentaires'}">Voir commentaire</a>
+                        <a th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/details'}">
+                            <button>Voir recette</button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+    <script>
+        function searchRecette(){
+            var xhr = create_HttpRequest();
+            var searchValue = document.getElementsByName("search")[0].value;
+
+            var list = document.getElementById("recette-list");
+
+            var selectedRadio = document.querySelector('input[name="idCategorie"]:checked');
+            var idCategorie = selectedRadio ? selectedRadio.value : null;
+            var datas;
+            xhr.addEventListener("load", function(event) {    
+                datas = JSON.parse(xhr.responseText);
+                console.log(datas);
+            });
+            xhr.open("GET", "/user/recette/search?idCategorie="+idCategorie+"&&search="+searchValue,false);
+            xhr.send(null);
+            console.log("Search term:", searchValue);
+            console.log("Selected category ID:", idCategorie);
+
+            list.innerHTML = "";
+            if (datas[0].length==0){
+                list.innerHTML = " <div>Aucun resultat</div>";
+            }else{
+                datas[0].forEach(element => {
+
+                var classValue = "";
+                if(datas[1].length != 0){
+                    var correspond  = false
+                    datas[1].forEach(enregistre => {
+                        if(enregistre.idRecette == element.idRecette){
+                            classValue = "saved";
+                            correspond = true;
+                        }
+                    });
+                    if(!correspond){
+                        classValue = "unsaved";
+                    }
+                }else{
+                    classValue ="unsaved";
+                }
+
+                list.innerHTML +=   "<div class=\"recette-card\">"
+                                        +"<img src=\"/images/default.jpg\">"
+                                        +"<div alter= \"button\" "
+                                            +"class=\""+classValue+"\" "
+                                            +"id=\"recette-"+element.idRecette+"\" "
+                                            +"onclick=\"enregistrer(" + element.idRecette + ")\">"
+                                        +"</div>"
+                                        +"<div>"    
+                                            +"<h3>"+element.nomRecette+"</h3>"
+                                            +"<h5>"+element.descriptions+"</p>"
+                                        +"</div>"
+                                        +"<a href=\"/user/recette/"+element.idRecette+"/commentaires\">"
+                                            +"Voir commentaires"
+                                        +"</a>"
+                                        +"<a href=\"/user/recette/"+element.idRecette+"/details\">"
+                                            +"<button>Voir recette</button>"
+                                        +"</a>"
+                                    +"</div>"
+                });
+                }
+            }
+            
+    </script>
+</html>

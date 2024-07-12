@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Recette - détails</title>
+        <link rel="stylesheet" th:href="@{/assets/recette-details.css}">
+        <script th:src="@{/script/xhr.script.js}"></script>
+    </head>
+
+    <body>
+        <header>
+            <a href="/">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="/">Home</a>
+                <a href="/user/recette/mesrecette">Mes recettes</a>
+                <a href="/user/login/form"  th:if="${user}== null">Se connecter</a>
+                <a href="/user/inscription/form" th:if="${user}== null">S'inscrire</a> 
+                <a href="/user/deconnect" style="color: red;" th:unless="${user}== null">Se déconnecter</a>
+                <a href="/user/recette/enregistrement">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="recette-info">
+                <img th:src="@{/images/default.jpg}">
+                <h1 th:text="${recette.getNomRecette()}"></h1>
+                <p th:text="${recette.getDescriptions()}">
+                </p>
+                <p>
+                    <span><b>Duree </b> <span th:text="${recette.getDuree()}"></span></span><br>
+                    <span><b>Portion </b> <span th:text="${recette.getNbPersonne()}"></span> </span><br>
+                    <span><b th:text="'Commentaires('+${recette.getCommentaires().size()}+')'"></b></span>
+                </p>
+            </section>
+
+            <section id="recette-detail">
+                <h3>Ingrédient</h3>
+                <ul>
+                    <li th:each=" ingredient : ${recette.getIngredients()}"
+                        th:text="${ingredient.getQuantite()}+' '+${ingredient.getUnite()}+' '+${ingredient.getNomIngredient()}">
+                    </li>
+                </ul>
+                <th:block th:each=" etape, iterStat : ${recette.getEtapes()}">
+                    <h3 th:text="'Etape '+${iterStat.index+1}"></h3>
+                    <p th:text="${etape.getNomEtape()}"></p>
+                </th:block>
+            </section>
+
+        </main>
+    </body>
+</html>

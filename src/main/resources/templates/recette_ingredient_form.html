@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/assets/recette-form.css}">
+        <title>Recette formulaire - ingredients</title>
+        <script th:src="@{/script/xhr.script.js}"></script>
+    </head>
+    <body>
+        <header>
+            <a href="#">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Recettes</a>
+                <a href="#">Mes recettes</a>
+                <a href="#">Se connecter</a>
+                <a href="#">S'inscrire</a>
+                <a href="#">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+        <main>
+            <div id="slogan">
+                <h1>PARTAGEZ VOS EXPERIENCES CULINAIRES !</h1>
+                <p>Racontez-nous vos aventures en cuisine et inspirez notre communauté 
+                    avec vos créations savoureuses. Partagez vos secrets, astuces 
+                    et recettes préférées pour que chacun puisse goûter à votre passion
+                    et à votre créativité.</p>
+            </div>
+            <form method="get" id="recette-form">
+                <center><h2>Ajouter les catégories formulaire </h2></center>
+                    <div th:if="${error} != null" th:text="${error}" style="color: red;"></div>
+                    <input type="text" name="unite" placeholder="Unité">
+                    <input type="number" name="quantite" placeholder="Quantité">
+                    <input type="text" name="nom" placeholder="ingredient">
+                    <button type="button" onclick="addIngredient()" style=" background-color: #f5c900d9"> Ajouter</button>
+                    
+                    <div id="categorie-list" class="form-list">
+                        <center><h2>Ajouter des catégories</h2></center>
+                    </div>
+                    <a href="/user/recette/form/etapes"><button type="button" class="suivant">Suivant</button></a>
+            </form>
+        </main>
+    </body>
+    <script>
+
+        function addIngredient(){
+            var xhr = create_HttpRequest();
+            
+            var form = document.getElementById('recette-form');
+            var formData = new FormData(form);
+
+            var datas = Array();
+            xhr.addEventListener("load", function(event) {    
+                datas = JSON.parse(xhr.responseText);
+                console.log(datas);
+                console.log(datas[0].unite);
+            });
+            xhr.open("POST", "/user/recette/form/ingredient/put",false);
+            xhr.send(formData);
+            var listIngredient = document.getElementById('categorie-list');
+            listIngredient.innerHTML = "";
+            for (let i = 0; i < datas.length; i++) {
+                listIngredient.innerHTML += "<div class=\"selected-option\" id=\"selected-option\">"
+                                                +"<p>"+datas[i].quantite+"  "+datas[i].unite+" "+datas[i].nomIngredient+"</p>"
+                                                +"<button onclick=\"removeIngredient("+i+")\">enlever</button> "
+                                            +"</div>"
+            }
+        }
+
+        function removeIngredient(index){
+            var xhr = create_HttpRequest();
+
+            var xhr = create_HttpRequest();
+            var datas = Array();
+            xhr.addEventListener("load", function(event) {    
+                datas = JSON.parse(xhr.responseText);
+                console.log(datas);
+            });
+            xhr.open("GET", "/user/recette/form/ingredient/delete/"+index,false);
+            xhr.send(null);
+            var listIngredient = document.getElementById('categorie-list');
+            listIngredient.innerHTML = "";
+            if(datas.length == 0){
+                listCategorie.innerHTML += "<h2>Ajouter des ingrédients</h2>"
+            }else{
+                for (let i = 0; i < datas.length; i++) {
+                    listIngredient.innerHTML += "<div class=\"selected-option\" id=\"selected-option\">"
+                                                    +"<p>"+datas[i].quantite+"  "+datas[i].unite+" "+datas[i].nomIngredient+"</p>"
+                                                    +"<button onclick=\"removeIngredient("+i+")\">enlever</button> "
+                                                +"</div>"
+                }
+            }
+        }
+    </script>
+</html>

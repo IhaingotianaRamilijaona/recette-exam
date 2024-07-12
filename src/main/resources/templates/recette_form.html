@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/assets/recette-form.css}">
+        <title>Recette formulaire</title>
+    </head>
+
+    <body>
+        <header>
+            <a href="#">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Recettes</a>
+                <a href="#">Mes recettes</a>
+                <a href="#">Se connecter</a>
+                <a href="#">S'inscrire</a>
+                <a href="#">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+        <main>
+            <div id="slogan">
+                <h1>PARTAGEZ VOS EXPERIENCES CULINAIRES !</h1>
+                <p>Racontez-nous vos aventures en cuisine et inspirez notre communauté 
+                    avec vos créations savoureuses. Partagez vos secrets, astuces 
+                    et recettes préférées pour que chacun puisse goûter à votre passion
+                    et à votre créativité.</p>
+            </div>
+            <form action="/user/recette/form/nom" method="get" id="recette-form">
+                <center><h2>Recette formulaire </h2></center>
+                <div th:if="${error} != null" th:text="${error}" style="color: red;"></div>
+                <input type="text" name="nom" placeholder="Nom de la recette">
+                <input type="time" name="duree" step="1">
+                <input type="number" name="nombre" placeholder="Nombre de personne">
+                <textarea name="description" rows="7" style="margin-top: 7px;"></textarea>
+                <button class="suivant">suivant</button>
+            </form>
+        </main>
+  
+    </body>
+</html>

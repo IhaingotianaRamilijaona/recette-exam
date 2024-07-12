@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/assets/recette-details.css}">
+        <title>Recette - commentaires</title>
+    </head>
+
+    <body>
+        <header>
+            <a href="/">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="/">Home</a>
+                <a href="/user/recette/mesrecette">Mes recettes</a>
+                <a href="/user/login/form" >Se connecter</a>
+                <a href="/user/inscription/form">S'inscrire</a>
+                <a href="/user/recette/enregistrement">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+
+        <main>
+            <form action="/user/recette/commentaire/insert" id="commentaire-form">
+                <h3>Commentez</h3>
+                <textarea name="commentaire" cols="30" rows="10" placeholder="Ecrivez quelque chose ..."></textarea><br>
+                <input type="hidden" name="idRecette" th:value="${idRecette}">
+                <button>Commentez</button>
+            </form>
+            <section id="recette-detail">
+                <h1>Liste des commentaires </h1>
+
+                <th:block th:if="${listCommentaires.size() != 0}">
+                    <div th:each="commentaire : ${listCommentaires}" class="commentaire">
+                        <h4 th:text="${commentaire.getUser().getNomUser()}"></h4>
+                        <p th:text="${commentaire.getCommentaire()}"></p>
+                    </div>
+                </th:block>
+                <th:block th:unless="${listCommentaires.size() != 0}">
+                    <h2>Aucun commentaire</h2>
+                </th:block>                
+            </section>
+        </main>
+    </body>
+</html>

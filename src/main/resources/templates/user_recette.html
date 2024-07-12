@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/assets/style.css}">
+        <title>Mes recettes</title>
+        <script th:src="@{/script/xhr.script.js}"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/">
+                <img th:src="@{/assets/img/logo.png}" class="logo">
+            </a>        
+            <nav>
+                <a href="/">Home</a>
+                <a href="#" class="active">Mes recettes</a>
+                <a href="/user/login/form" >Se connecter</a>
+                <a href="/user/inscription/form">S'inscrire</a>
+                <a href="/user/recette/enregistrement">
+                    <img th:src="@{/assets/img/saved.png}" class="header-save">
+                </a>
+            </nav>
+        </header>
+        <main>
+            <h1 style="display: flex;width:100%;justify-content: space-between; align-items: center;">
+                Mes recettes
+                <a href="">
+                    <button class="btn-recette">Ajouer un recette</button>
+                </a>
+            </h1>
+            <section id="recette-list">
+                <div class="recette-card"
+                    th:each="recette : ${listRecette}">
+                    <img th:src="@{/images/Surf_Board_MockupForFree.jpg}">
+                    <div style="margin-top: 15px;">
+                        <h3 th:text="${recette.getNomRecette()}"></h3>
+                        <h5 th:text="${recette.getDescriptions()}"></h5>
+                        <a th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/commentaires'}">Voir commentaire</a>
+                        <a th:href="@{'/user/recette/'+${recette.getIdRecette()}+'/details'}">
+                            <button>Voir recette</button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
